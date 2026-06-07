@@ -14,7 +14,7 @@ import json
 import warnings
 warnings.filterwarnings('ignore')
 
-# ── Load & Prepare Data ──────────────────────────────────────────────────────
+# Load & Prepare Data
 df = pd.read_csv('ds_salaries.csv')
 
 exp_score_map  = {'EN': 1, 'MI': 2, 'SE': 3, 'EX': 4}
@@ -25,7 +25,7 @@ df['is_remote']        = (df['remote_ratio'] == 100).astype(int)
 df['size_score']       = df['company_size'].map(size_score_map)
 df['is_us']            = (df['company_location'] == 'US').astype(int)
 
-# ── Features ─────────────────────────────────────────────────────────────────
+#Features
 selected_columns = [
     'experience_level', 'employment_type', 'job_title',
     'company_location', 'company_size', 'remote_ratio',
@@ -44,7 +44,7 @@ y = df_model['salary_in_usd']
 
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
 
-# ── Preprocessor ─────────────────────────────────────────────────────────────
+#Preprocessor
 categorical_transformer = Pipeline(steps=[
     ('imputer', SimpleImputer(strategy='most_frequent')),
     ('onehot', OneHotEncoder(handle_unknown='ignore'))
@@ -58,7 +58,7 @@ preprocessor = ColumnTransformer(transformers=[
     ('cat', categorical_transformer, categorical_cols)
 ])
 
-# ── Train Models ──────────────────────────────────────────────────────────────
+#Train Models
 lr_pipeline = Pipeline(steps=[('preprocessor', preprocessor), ('model', LinearRegression())])
 lr_pipeline.fit(X_train, y_train)
 lr_r2  = r2_score(y_test, lr_pipeline.predict(X_test))
@@ -81,7 +81,7 @@ print(f"Linear Regression  R²: {lr_r2:.4f}")
 print(f"Decision Tree      R²: {dt_r2:.4f}")
 print(f"Random Forest      R²: {rf_r2:.4f}")
 
-# ── Save Models & Metrics ────────────────────────────────────────────────────
+#Save Models & Metrics
 with open('swe_salary_rf_model.pkl', 'wb') as f:
     pickle.dump(rf_pipeline, f)
 with open('swe_salary_lr_model.pkl', 'wb') as f:
