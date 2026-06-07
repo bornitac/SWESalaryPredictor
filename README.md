@@ -2,7 +2,7 @@
 
 An interactive web dashboard that predicts tech and data science salaries based on job title, experience level, employment type, company size, work setting, and location. Built using Python and Dash, trained on 3,755 records, and deployed on Render.
 
-🔗 **Live Demo:** https://swe-salary-predictor.onrender.com
+**Live Demo:** https://swe-salary-predictor.onrender.com
 
 > Note: The app is hosted on Render's free tier and may take 1-2 minutes to load if it hasn't been accessed recently.
 
@@ -85,4 +85,4 @@ pip install -r requirements.txt
 ## Data Source
 
 **AI/ML/Data Science Salary Dataset** — Kaggle  
-🔗 https://www.kaggle.com/datasets/arnabchaki/data-science-salaries-2023
+https://www.kaggle.com/datasets/arnabchaki/data-science-salaries-2023
